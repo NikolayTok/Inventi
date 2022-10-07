@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Route, Routes} from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import AllArticles from './components/AllArticles'
 import { PostsTypes } from './types'
 import { Context } from './context'
@@ -17,9 +17,14 @@ function App() {
     getData()
   }, [])
 
+    const deletePost = (id: number) => {
+      setData([...data.filter((task) => task.id !== id)])
+    }
+
+
   return (
     <div className='App flex justify-between'>
-      <Context.Provider value={{ data }}>
+      <Context.Provider value={{ data, deletePost }}>
         <AllArticles />
         <Routes>
           <Route path='detailPost/:id' element={<PostDetail />} />
